@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Login Screen</string>
+    <string name="app_name">Login App</string>
     <string name="result">Result</string>
     <string name="login">Login</string>
     <string name="e_mail">E-Mail</string>
