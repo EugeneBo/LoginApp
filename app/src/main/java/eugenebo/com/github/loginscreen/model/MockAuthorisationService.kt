@@ -9,7 +9,7 @@ class MockAuthorisationService(private val callback: Callback) : AsyncTask<UserC
     private val validPass = "admin123"
 
     override fun doInBackground(vararg params: UserCredentials):Boolean {
-        Thread.sleep(7_000)
+        Thread.sleep(3_000)
         return validCredentials(params[0].email, params[0].pass)
     }
 
