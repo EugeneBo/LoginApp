@@ -28,6 +28,9 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
             "eugenebo.com.github.loginscreen.loginscreen_progressBarTag"
     private var isProgressBarEnabled = false
 
+    // flag for avoiding "IllegalStateException: Can not perform this action after onSaveInstanceState"
+    private var isInstanceSaved = false
+
     private val userEmail: String
         get() = emailEditText.text.toString()
 
@@ -61,11 +64,15 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        isInstanceSaved = false
+    }
+
     override fun onResume() {
         super.onResume()
-        if (isProgressBarEnabled) {
-            setProgressBarEnable(true)
-        }
+        isInstanceSaved = false
+        if (isProgressBarEnabled) setProgressBarEnable(true)
     }
 
     override fun providePresenter(): LoginPresenter {
@@ -107,7 +114,8 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
     }
 
     override fun showFailureScreen() {
-        FailureAuthDialog().show(supportFragmentManager, "FailureDialog")
+        if (!isInstanceSaved)
+            FailureAuthDialog().show(supportFragmentManager, "FailureDialog")
         setProgressBarEnable(false)
     }
 
@@ -130,6 +138,7 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
+        isInstanceSaved = true
         outState?.putBoolean(progressBarTag, isProgressBarEnabled)
         super.onSaveInstanceState(outState)
     }
