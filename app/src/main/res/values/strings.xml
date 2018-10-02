@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Login Screen</string>
+    <string name="result">Result</string>
+    <string name="login">Login</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="pass_latin_letters_digits_hint">Has latin letters and numbers</string>
+    <string name="length_pass_hint">Min 6 max 40 characters</string>
+    <string name="email_hint">E-mail in format \"username@email.com\"</string>
+    <string name="logo_content_description">Logo</string>
+    <string name="dialog_failure_message">Invalid user credentials!\nPlease, try again.</string>
+    <string name="dialog_button">TRY AGAIN</string>
+    <string name="success">SUCCESS!</string>
+    <string name="Logo">TODO</string>
+    <string name="check_image">Check image</string>
+</resources>

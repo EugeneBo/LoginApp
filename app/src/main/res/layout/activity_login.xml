@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/baseConstrain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/baseConstrain"
+                app:srcCompat="@drawable/mentalstack_logo_white"
+                android:contentDescription="@string/Logo" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/e_mail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logoImageView">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:inputType="textEmailAddress" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/emailCheckBox"
+                android:layout_width="@dimen/check_image_size"
+                android:layout_height="@dimen/check_image_size"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/emailInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/emailInputLayout"
+                android:contentDescription="@string/check_image" />
+
+            <TextView
+                android:id="@+id/emailHint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/email_hint"
+                android:textColor="@color/hintDarkGrey"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/emailInputLayout" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/passInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/passEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/passLatinLettersAndDigitsCheckBox"
+                android:layout_width="@dimen/check_image_size"
+                android:layout_height="@dimen/check_image_size"
+                android:layout_marginStart="2dp"
+                app:layout_constraintStart_toStartOf="@+id/passInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/passInputLayout"
+                android:contentDescription="@string/check_image" />
+
+            <TextView
+                android:id="@+id/passLatinCharAndDigitHintTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/pass_latin_letters_digits_hint"
+                android:textColor="@color/hintDarkGrey"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/passLatinLettersAndDigitsCheckBox"
+                app:layout_constraintTop_toBottomOf="@+id/passInputLayout" />
+
+
+            <ImageView
+                android:id="@+id/passLengthCheckBox"
+                android:layout_width="@dimen/check_image_size"
+                android:layout_height="@dimen/check_image_size"
+                app:layout_constraintStart_toStartOf="@+id/passLatinLettersAndDigitsCheckBox"
+                app:layout_constraintTop_toBottomOf="@+id/passLatinLettersAndDigitsCheckBox"
+                android:contentDescription="@string/check_image" />
+
+            <TextView
+                android:id="@+id/passLengthHintTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/length_pass_hint"
+                android:textColor="@color/hintDarkGrey"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/passLengthCheckBox"
+                app:layout_constraintTop_toTopOf="@+id/passLengthCheckBox" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passLengthHintTextView">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/loginButton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/button_login" />
+            </RelativeLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
