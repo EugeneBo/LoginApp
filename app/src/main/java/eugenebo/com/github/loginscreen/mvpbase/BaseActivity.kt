@@ -28,7 +28,7 @@ abstract class BaseActivity<V : BaseView, P : BasePresenter<V>?> : AppCompatActi
     }
 
     override fun onDestroy() {
-        presenter!!.detachView()
+        presenter?.detachView()
         super.onDestroy()
     }
 

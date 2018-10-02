@@ -24,16 +24,22 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
 
+    private val progressBarTag =
+            "eugenebo.com.github.loginscreen.loginscreen_progressBarTag"
+    private var isProgressBarEnabled = false
+
     private val userEmail: String
-        get() = emailEditText?.text.toString()
+        get() = emailEditText.text.toString()
 
     private val userPass: String
-        get() = passEditText?.text.toString()
-
+        get() = passEditText.text.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        if (savedInstanceState != null)
+            isProgressBarEnabled = savedInstanceState.getBoolean(progressBarTag)
 
         val listener = object : AfterTextChangedListener() {
             override fun afterTextChanged(s: Editable) {
@@ -43,16 +49,23 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
             }
         }
 
-        emailEditText?.addTextChangedListener(listener)
-        passEditText?.addTextChangedListener(listener)
-        loginButton?.isEnabled = false
+        emailEditText.addTextChangedListener(listener)
+        passEditText.addTextChangedListener(listener)
 
-        loginButton?.setOnClickListener {
+        loginButton.isEnabled = false
+
+        loginButton.setOnClickListener {
             setProgressBarEnable(true)
             val userCredentials = UserCredentials(userEmail, userPass)
             presenter?.onLoginButtonClicked(userCredentials)
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        if (isProgressBarEnabled) {
+            setProgressBarEnable(true)
+        }
     }
 
     override fun providePresenter(): LoginPresenter {
@@ -61,30 +74,30 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
 
     override fun updateUI(inputState: AfterValidationInputState) {
 
-        if (emailEditText?.text?.length != 0)
+        if (emailEditText.text?.length != 0)
             changeCheckBoxState(emailCheckBox, inputState.isEmailValid)
         else
-            emailCheckBox?.setImageDrawable(null)
+            emailCheckBox.setImageDrawable(null)
 
 
-        if (passEditText?.text?.length != 0) {
+        if (passEditText.text?.length != 0) {
             changeCheckBoxState(passLatinLettersAndDigitsCheckBox, inputState.isPassHasLatinLettersAndNumbers)
             changeCheckBoxState(passLengthCheckBox, inputState.isPassLengthValid)
         } else {
-            passLengthCheckBox?.setImageDrawable(null)
-            passLatinLettersAndDigitsCheckBox?.setImageDrawable(null)
+            passLengthCheckBox.setImageDrawable(null)
+            passLatinLettersAndDigitsCheckBox.setImageDrawable(null)
         }
 
-        loginButton?.isEnabled = inputState.isEmailValid &&
+        loginButton.isEnabled = inputState.isEmailValid &&
                 inputState.isPassHasLatinLettersAndNumbers &&
                 inputState.isPassLengthValid
     }
 
-    private fun changeCheckBoxState(checkBox: ImageView?, isValid: Boolean) {
+    private fun changeCheckBoxState(checkBox: ImageView, isValid: Boolean) {
         if (isValid)
-            checkBox?.setImageResource(R.drawable.ic_check_16dp)
+            checkBox.setImageResource(R.drawable.ic_check_16dp)
         else
-            checkBox?.setImageResource(R.drawable.ic_not_valid_16dp)
+            checkBox.setImageResource(R.drawable.ic_not_valid_16dp)
     }
 
     override fun showSuccessScreen() {
@@ -101,19 +114,23 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
 
     private fun setProgressBarEnable(isEnable: Boolean) {
         if (isEnable) {
-            progressBar?.visibility = View.VISIBLE
-            loginButton?.isEnabled = false
-            emailEditText?.isEnabled = false
-            passEditText?.isEnabled = false
-            loginButton?.text = null
+            progressBar.visibility = View.VISIBLE
+            loginButton.isEnabled = false
+            emailEditText.isEnabled = false
+            passEditText.isEnabled = false
+            loginButton.text = null
         } else {
-            progressBar?.visibility = View.GONE
-            loginButton?.isEnabled = true
-            emailEditText?.isEnabled = true
-            passEditText?.isEnabled = true
-            loginButton?.setText(R.string.button_login)
+            progressBar.visibility = View.GONE
+            loginButton.isEnabled = true
+            emailEditText.isEnabled = true
+            passEditText.isEnabled = true
+            loginButton.setText(R.string.button_login)
         }
+        isProgressBarEnabled = isEnable
     }
 
-
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putBoolean(progressBarTag, isProgressBarEnabled)
+        super.onSaveInstanceState(outState)
+    }
 }

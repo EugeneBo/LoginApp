@@ -15,7 +15,7 @@ abstract class BasePresenter<V : BaseView> {
 
     internal fun detachView() {
         onDetach()
-        viewRef!!.clear()
+        viewRef?.clear()
     }
 
     protected fun onAttach() {}
