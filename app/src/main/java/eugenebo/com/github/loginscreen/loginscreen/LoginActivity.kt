@@ -11,6 +11,7 @@ package eugenebo.com.github.loginscreen.loginscreen
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import eugenebo.com.github.loginscreen.model.AfterValidationInputState
@@ -71,6 +72,7 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
 
     override fun onResume() {
         super.onResume()
+        Log.d("LoginActivity", "onResume()" )
         isInstanceSaved = false
         if (isProgressBarEnabled) setProgressBarEnable(true)
     }
@@ -137,9 +139,27 @@ class LoginActivity : BaseActivity<LoginView, LoginPresenter>(), LoginView {
         isProgressBarEnabled = isEnable
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d("LoginActivity", "onPause()" )
+    }
+
     override fun onSaveInstanceState(outState: Bundle?) {
         isInstanceSaved = true
         outState?.putBoolean(progressBarTag, isProgressBarEnabled)
         super.onSaveInstanceState(outState)
+        Log.d("LoginActivity", "onSaveInstanceState()" )
     }
+
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("LoginActivity", "onStop()" )
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("LoginActivity", "onRestart()" )
+    }
+
 }

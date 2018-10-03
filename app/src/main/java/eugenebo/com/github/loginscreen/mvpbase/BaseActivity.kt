@@ -10,11 +10,13 @@ abstract class BaseActivity<V : BaseView, P : BasePresenter<V>?> : AppCompatActi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("LoginActivity", "onCreate()" )
         attachPresenter()
     }
 
     override fun onStart() {
         super.onStart()
+        Log.d("LoginActivity", "onStart()" )
         presenter?.attachView(this as V)
     }
 
@@ -30,6 +32,7 @@ abstract class BaseActivity<V : BaseView, P : BasePresenter<V>?> : AppCompatActi
     override fun onDestroy() {
         presenter?.detachView()
         super.onDestroy()
+        Log.d("LoginActivity", "onDestroy()" )
     }
 
     override fun onRetainCustomNonConfigurationInstance(): Any? {
@@ -37,5 +40,7 @@ abstract class BaseActivity<V : BaseView, P : BasePresenter<V>?> : AppCompatActi
     }
 
     protected abstract fun providePresenter(): P
+
+
 
 }
